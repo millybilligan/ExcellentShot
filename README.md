@@ -7,3 +7,6 @@ A better version of NiceShot with same functions.
 * Get the main disk (not stable)
 * Get the reverse shell
 * Reconnect client to server if it fail
+
+## Responsibility
+The author is not responsible for the use of this program. Use for illegal purposes is prohibited!
